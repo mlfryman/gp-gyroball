@@ -17,16 +17,12 @@ html
       ion-header-bar.bar-stable
         h1.title Gyroball
       ion-content
-        h6 Divice Width: {{x}}
-        h6 Divice Height: {{y}}
-        h6 Ball x: {{ballX}}
-        h6 Ball y: {{ballY}}
         .area(style='width: {{x}}px; height: {{y}}px;')
           .hole(style='left: 200px; height: 50px;')
           .ball(style='left: {{ballX}}px; top: {{ballY}}px;')
         .orientation {{orientation}}
       .bar.bar-footer.bar-stable
-        button(ng-click='start()') Start Gyro
-        button(ng-click='reset()') Reset Gyro
+        button(ng-click='startTimer()') Start
+        button(ng-click='stopTimer()') Stop
         .timer
           timer(autostart='false', interval='1000') {{minutes}} min, {{seconds}} sec

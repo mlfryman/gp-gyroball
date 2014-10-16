@@ -18,36 +18,13 @@
     });
     // END Timer
 
-    // GYROSCOPE
-    function success(orientation){
-      console.log('------SUCCESS!-------\n' +
-        'ORIENTATION= ' + '\n' +
-        'alpha: ' + orientation.alpha + '\n' +
-        'beta: ' + orientation.beta + '\n' +
-        'gamma: ' + orientation.gamma + '\n' +
-        'absolute: ' + orientation.absolute + '\n');
-      $scope.orientation = orientation;
-      // $scope.digest();
-    }
+    // DEVICE ORIENTATION
+    window.addEventListener('device-orientation', function(data){
+      $scope.data = data;
+      $scope.digest();
+    });
+    // END DEVICE ORIENTATION
 
-    function error(err){
-      alert('ERROR!', err);
-    }
-
-    $scope.start = function(){
-      console.log('-------Starting Gyroscope-------');
-      navigator.gyroscope.watchGyroscope(success, error, {frequency:500});
-      $scope.startTimer();
-    };
-
-    $scope.reset = function(id){
-      $scope.stopTimer();
-      // @param {String} id - the id of the watch returned from #watchGyroscope.
-      console.log('-------Reset Gyroscope-------');
-      navigator.gyroscope.clearWatch(id);
-    };
-    // END Gyroscope
-    
     // BALL
     $scope.x = document.documentElement.clientWidth;
     $scope.y = document.documentElement.clientHeight-20; //-20 accounts for iphone availHeight

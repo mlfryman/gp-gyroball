@@ -18,10 +18,6 @@
         <h1 class="title">Gyroball</h1>
       </ion-header-bar>
       <ion-content>
-        <h6>Divice Width: {{x}}</h6>
-        <h6>Divice Height: {{y}}</h6>
-        <h6>Ball x: {{ballX}}</h6>
-        <h6>Ball y: {{ballY}}</h6>
         <div style="width: {{x}}px; height: {{y}}px;" class="area">
           <div style="left: 200px; height: 50px;" class="hole"></div>
           <div style="left: {{ballX}}px; top: {{ballY}}px;" class="ball"></div>
@@ -29,8 +25,8 @@
         <div class="orientation">{{orientation}}</div>
       </ion-content>
       <div class="bar bar-footer bar-stable">
-        <button ng-click="start()">Start Gyro</button>
-        <button ng-click="reset()">Reset Gyro</button>
+        <button ng-click="startTimer()">Start</button>
+        <button ng-click="stopTimer()">Stop</button>
         <div class="timer">
           <timer autostart="false" interval="1000">{{minutes}} min, {{seconds}} sec</timer>
         </div>
