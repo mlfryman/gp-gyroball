@@ -18,16 +18,11 @@
     // END Timer
 
     function success(orientation){
-      console.log('------SUCCESS!!!-------');
-      //$scope.alpha = orientation.alpha;
-      //$scope.beta = orientation.beta;
-      //$scope.gamma = orientation.gamma;
-      //$scope.absolute = orientation.absolute;
-      console.log(orientation);
+      console.log('------SUCCESS!!!-------', orientation);
     }
 
     function error(response){
-      console.log('ERROR:', response);
+      console.log('-----ERROR:', response);
     }
 
     $scope.start = function(){
