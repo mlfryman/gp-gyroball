@@ -11,13 +11,19 @@ html
     script(src='lib/angular-timer/dist/angular-timer.min.js')
     script(src='js/app.js')
     script(src='js/MainCtrl.js')
-    script(src='js/ball.js')
+    //- script(src='js/ball.js')
   body(data-ng-app='gyroball')
     ion-pane(data-ng-controller='MainCtrl')
       ion-header-bar.bar-stable
         h1.title Gyroball
       ion-content
-        .canvas
+        h6 Divice Width: {{x}}
+        h6 Divice Height: {{y}}
+        h6 Ball x: {{ballX}}
+        h6 Ball y: {{ballY}}
+        .area(style='width: {{x}}px; height: {{y}}px;')
+          .hole(style='left: 200px; height: 50px;')
+          .ball(style='left: {{ballX}}px; top: {{ballY}}px;')
         .orientation {{orientation}}
       .bar.bar-footer.bar-stable
         button(ng-click='start()') Start Gyro

@@ -27,6 +27,7 @@
         'gamma: ' + orientation.gamma + '\n' +
         'absolute: ' + orientation.absolute + '\n');
       $scope.orientation = orientation;
+      // $scope.digest();
     }
 
     function error(err){
@@ -46,11 +47,13 @@
       navigator.gyroscope.clearWatch(id);
     };
     // END Gyroscope
+    
     // BALL
-    // $scope.x = document.documentElement.clientWidth;
-    // $scope.y = document.documentElement.clientHeight - 20;
-    // $scope.ballX = $scope.x - 50;
-    // $scope.ballY = $scope.y + 5;
+    $scope.x = document.documentElement.clientWidth;
+    $scope.y = document.documentElement.clientHeight-20; //-20 accounts for iphone availHeight
+
+    $scope.ballY =Math.floor(Math.random()*$scope.y+1);
+    $scope.ballX =Math.floor(Math.random()*$scope.x+1);
 
   }]);
 })();
