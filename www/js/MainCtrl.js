@@ -18,22 +18,21 @@
     // END Timer
 
     function success(orientation){
-      $scope.alpha = orientation.alpha;
-      $scope.beta = orientation.beta;
-      $scope.gamma = orientation.gamma;
-      $scope.absolute = orientation.absolute;
+      console.log('------SUCCESS!!!-------');
+      //$scope.alpha = orientation.alpha;
+      //$scope.beta = orientation.beta;
+      //$scope.gamma = orientation.gamma;
+      //$scope.absolute = orientation.absolute;
       console.log(orientation);
     }
 
-    console.log(success, error);
-
-    function error(o){
-      console.log('ERROR:', o);
+    function error(response){
+      console.log('ERROR:', response);
     }
 
     $scope.start = function(){
+      console.log('-------Starting Gyroscope-------');
       navigator.gyroscope.watchGyroscope(success, error);
-      console.log(success, error);
     };
 
     $scope.reset = function(){

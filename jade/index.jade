@@ -18,4 +18,8 @@ html
       ion-content(data-ng-controller='MainCtrl')
         timer(interval='1000') {{minutes}} min, {{seconds}} sec
         button(ng-click='startTimer()', ng-disabled='timerRunning') Start
-        button(ng-click='resetTimer()', ng-disabled='!timerRunning') Stop
+        button(ng-click='stopTimer()', ng-disabled='!timerRunning') Stop
+        br
+        br
+        button(ng-click='start()') Start Gyro
+        button(ng-click='reset()') Reset Gyro
