@@ -12,14 +12,14 @@ html
     script(src='js/app.js')
     script(src='js/MainCtrl.js')
   body(data-ng-app='gyroball')
-    ion-pane
+    ion-pane(data-ng-controller='MainCtrl')
       ion-header-bar.bar-stable
         h1.title Gyroball
-      ion-content(data-ng-controller='MainCtrl')
+      ion-content
+        .canvas
+        .orientation {{orientation}}
+      .bar.bar-footer.bar-stable
         button(ng-click='start()') Start Gyro
         button(ng-click='reset()') Reset Gyro
-        br
-        br
-        timer(autostart='false', interval='1000') {{minutes}} min, {{seconds}} sec
-        button(ng-click='startTimer()', ng-disabled='timerRunning') Start
-        button(ng-click='stopTimer()', ng-disabled='!timerRunning') Stop
+        .timer
+          timer(autostart='false', interval='1000') {{minutes}} min, {{seconds}} sec

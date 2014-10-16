@@ -4,7 +4,7 @@
   angular.module('gyroball', ['ionic', 'timer'])
   .controller('MainCtrl', ['$scope', '$interval', function($scope, $interval){
     // TIMER
-    $scope.timerRunning = false;
+    // $scope.timerRunning = false;
     $scope.startTimer = function(){
       $scope.$broadcast('timer-start');
       $scope.timerRunning = true;
@@ -15,6 +15,7 @@
     };
     $scope.$on('timer-stopped', function(event, data){
       console.log('Timer Stopped - data = ', data);
+    });
     // END Timer
 
     // GYROSCOPE
@@ -34,19 +35,18 @@
 
     $scope.start = function(){
       console.log('-------Starting Gyroscope-------');
-      navigator.gyroscope.watchGyroscope(success, error, {frequency:500}).then(function(){
-        $scope.startTimer();
-      });
+      navigator.gyroscope.watchGyroscope(success, error, {frequency:500});
+      $scope.startTimer();
     };
 
     $scope.reset = function(id){
+      $scope.stopTimer();
       // @param {String} id - the id of the watch returned from #watchGyroscope.
       console.log('-------Reset Gyroscope-------');
       navigator.gyroscope.clearWatch(id);
-      $scope.stopTimer();
     };
     // END Gyroscope
     // place ball in random location
-  });
+
   }]);
 })();
