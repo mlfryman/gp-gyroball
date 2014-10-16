@@ -46,7 +46,11 @@
       navigator.gyroscope.clearWatch(id);
     };
     // END Gyroscope
-    // place ball in random location
+    // BALL
+    // $scope.x = document.documentElement.clientWidth;
+    // $scope.y = document.documentElement.clientHeight - 20;
+    // $scope.ballX = $scope.x - 50;
+    // $scope.ballY = $scope.y + 5;
 
   }]);
 })();

@@ -1,1 +1,8 @@
-/* Empty. Add your own CSS if you like */
+.ball{
+  background-color: red;
+  border-radius: 50%;
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  z-index: 100;
+}
