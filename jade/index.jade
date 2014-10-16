@@ -16,6 +16,6 @@ html
       ion-header-bar.bar-stable
         h1.title Gyroball
       ion-content(data-ng-controller='MainCtrl')
-        timer(interval='1000') {{minutes}} minutes, {{seconds}} seconds
+        timer(interval='1000') {{minutes}} min, {{seconds}} sec
         button(ng-click='startTimer()', ng-disabled='timerRunning') Start
-        button(ng-click='stopTimer()', ng-disabled='!timerRunning') Stop
+        button(ng-click='resetTimer()', ng-disabled='!timerRunning') Stop

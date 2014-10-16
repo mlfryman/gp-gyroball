@@ -18,9 +18,9 @@
         <h1 class="title">Gyroball</h1>
       </ion-header-bar>
       <ion-content data-ng-controller="MainCtrl">
-        <timer interval="1000">{{minutes}} minutes, {{seconds}} seconds</timer>
+        <timer interval="1000">{{minutes}} min, {{seconds}} sec</timer>
         <button ng-click="startTimer()" ng-disabled="timerRunning">Start</button>
-        <button ng-click="stopTimer()" ng-disabled="!timerRunning">Stop</button>
+        <button ng-click="resetTimer()" ng-disabled="!timerRunning">Stop</button>
       </ion-content>
     </ion-pane>
   </body>
