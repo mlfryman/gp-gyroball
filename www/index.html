@@ -20,7 +20,7 @@
       <ion-content data-ng-controller="MainCtrl">
         <button ng-click="start()">Start Gyro</button>
         <button ng-click="reset()">Reset Gyro</button><br><br>
-        <timer interval="1000">{{minutes}} min, {{seconds}} sec</timer>
+        <timer autostart="false" interval="1000">{{minutes}} min, {{seconds}} sec</timer>
         <button ng-click="startTimer()" ng-disabled="timerRunning">Start</button>
         <button ng-click="stopTimer()" ng-disabled="!timerRunning">Stop</button>
       </ion-content>

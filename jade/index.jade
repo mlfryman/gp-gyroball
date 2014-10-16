@@ -20,6 +20,6 @@ html
         button(ng-click='reset()') Reset Gyro
         br
         br
-        timer(interval='1000') {{minutes}} min, {{seconds}} sec
+        timer(autostart='false', interval='1000') {{minutes}} min, {{seconds}} sec
         button(ng-click='startTimer()', ng-disabled='timerRunning') Start
         button(ng-click='stopTimer()', ng-disabled='!timerRunning') Stop
