@@ -1,30 +1,43 @@
 (function(){
   'use strict';
 
-  angular.module('gyroball', ['ionic', 'timer'])
-  .controller('MainCtrl', ['$scope', '$interval', function($scope, $interval){
-    // TIMER
-    // $scope.timerRunning = false;
-    $scope.startTimer = function(){
-      $scope.$broadcast('timer-start');
-      $scope.timerRunning = true;
-    };
-    $scope.stopTimer = function(){
-      $scope.$broadcast('timer-stop');
-      $scope.timerRunning = false;
-    };
-    $scope.$on('timer-stopped', function(event, data){
-      console.log('Timer Stopped - data = ', data);
-    });
-    // END Timer
+  angular.module('gyroball', ['ionic'])
+  .controller('AppCtrl', ['$scope', '$interval', 'Ball', 'Boundaries', 'DeviceMotionControl', 'Game', 'ScreenOrientation', 'Target', 'Timer', function($scope, $interval, 'Ball', 'Boundaries', 'DeviceMotionControl', 'Game', 'ScreenOrientation', 'Target', 'Timer'){
+      /*
+       * Initialize the app by calling all init functions
+       */
+     function init(){
+        /* Initialize Game */
+        Game.init();
 
-    // DEVICE ORIENTATION
-    window.addEventListener('deviceorientation', function(data){
-      $scope.data = data;
-      console.log(data);
-      $scope.digest();
-    });
-    // END DEVICE ORIENTATION
-    // BALL
+        /* Create Boundaries */
+        Boundaries.init({
+          margin: 10
+        });
+
+        /* Create Target */
+        Target.init({
+          size: 50,
+          xPos: 100,
+          yPos: 50
+        });
+
+        /* Create Ball */
+        Ball.init({
+          size: 20,
+          xPos: Game.playground.width - 30,
+          yPos: Game.playground.height - 30
+        });
+
+        /* Lock Screen Orientation to Portrait */
+        ScreenOrientation.init();
+        ScreenOrientation.lockOrientation('portrait-primary');
+
+        /* Init Device Motion Control */
+        DeviceMotionControl.init();
+
+        /* Start the Game */
+        Game.start();
+    }
   }]);
 })();
