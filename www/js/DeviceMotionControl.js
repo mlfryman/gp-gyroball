@@ -56,10 +56,9 @@
             /* Get acceleration on x, y and z axis */
             var x = deviceMotionEvent.accelerationIncludingGravity.x * implementationFix,
                 y = deviceMotionEvent.accelerationIncludingGravity.y * implementationFix,
-                z = deviceMotionEvent.accelerationIncludingGravity.z;
-
-            /* Get the interval (ms) at which data is obtained from the underlying hardware */
-            var interval = deviceMotionEvent.interval;
+                z = deviceMotionEvent.accelerationIncludingGravity.z,
+                /* Get the interval (ms) at which data is obtained from the underlying hardware */
+                interval = deviceMotionEvent.interval;
 
             /* Handle the screen orientation */
             ScreenOrientation.handleOrientation({

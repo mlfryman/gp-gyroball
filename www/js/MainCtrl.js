@@ -1,8 +1,10 @@
+/* jshint unused: false */
+
 (function(){
   'use strict';
 
   angular.module('gyroball', ['ionic'])
-  .controller('AppCtrl', ['$scope', '$interval', 'Ball', 'Boundaries', 'DeviceMotionControl', 'Game', 'ScreenOrientation', 'Target', 'Timer', function($scope, $interval, 'Ball', 'Boundaries', 'DeviceMotionControl', 'Game', 'ScreenOrientation', 'Target', 'Timer'){
+  .controller('AppCtrl', ['$scope', '$interval', 'Ball', 'Boundaries', 'DeviceMotionControl', 'Game', 'ScreenOrientation', 'Target', 'Timer', function($scope, $interval, Ball, Boundaries, DeviceMotionControl, Game, ScreenOrientation, Target, Timer){
       /*
        * Initialize the app by calling all init functions
        */
