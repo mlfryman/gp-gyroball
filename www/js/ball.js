@@ -49,16 +49,16 @@
       this.status = 'crashing';
 
       if (outofboundaries === 'left'){
-        this.position.x = Boundaries.left - 0 + (this.originalSize / 2);
+        this.position.x = Boundaries.left - 0 + (this.size / 2);
       }
       else if (outofboundaries === 'top'){
-        this.position.y = Boundaries.top - 0 + (this.originalSize / 2);
+        this.position.y = Boundaries.top - 0 + (this.size / 2);
       }
       else if (outofboundaries === 'right'){
-        this.position.x = Boundaries.top - 0 + Boundaries.width - (this.originalSize / 2);
+        this.position.x = Boundaries.top - 0 + Boundaries.width - (this.size / 2);
       }
       else if (outofboundaries === 'bottom'){
-        this.position.y = Boundaries.left - 0 + Boundaries.height - (this.originalSize / 2);
+        this.position.y = Boundaries.left - 0 + Boundaries.height - (this.size / 2);
       }
 
       this.draw();
