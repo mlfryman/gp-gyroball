@@ -19,18 +19,12 @@
     // END Timer
 
     // DEVICE ORIENTATION
-    window.addEventListener('device-orientation', function(data){
+    window.addEventListener('deviceorientation', function(data){
       $scope.data = data;
+      console.log(data);
       $scope.digest();
     });
     // END DEVICE ORIENTATION
-
     // BALL
-    $scope.x = document.documentElement.clientWidth;
-    $scope.y = document.documentElement.clientHeight-20; //-20 accounts for iphone availHeight
-
-    $scope.ballY =Math.floor(Math.random()*$scope.y+1);
-    $scope.ballX =Math.floor(Math.random()*$scope.x+1);
-
   }]);
 })();

@@ -18,19 +18,21 @@
         <h1 class="title">Gyroball</h1>
       </ion-header-bar>
       <ion-content>
+        <canvas id="gameCanvas" width="{{x}}px" height="{{y}}px"></canvas>
         <div style="width: {{x}}px; height: {{y}}px;" class="area">
           <div style="left: 200px; height: 50px;" class="hole"></div>
           <div style="left: {{ballX}}px; top: {{ballY}}px;" class="ball"></div>
         </div>
-        <div class="orientation">{{orientation}}</div>
-      </ion-content>
-      <div class="bar bar-footer bar-stable">
-        <button ng-click="startTimer()">Start</button>
-        <button ng-click="stopTimer()">Stop</button>
-        <div class="timer">
-          <timer autostart="false" interval="1000">{{minutes}} min, {{seconds}} sec</timer>
+        <pre>{{orientation | json}}</pre>
+        <pre>{{data | json}}</pre>
+        <div class="bar bar-footer bar-stable">
+          <button ng-click="startTimer()">Start</button>
+          <button ng-click="stopTimer()">Stop</button>
+          <div class="timer">
+            <timer autostart="false" interval="1000">{{minutes}} min, {{seconds}} sec</timer>
+          </div>
         </div>
-      </div>
+      </ion-content>
     </ion-pane>
   </body>
 </html>
