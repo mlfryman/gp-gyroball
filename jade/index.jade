@@ -17,9 +17,9 @@ html
       ion-header-bar.bar-stable
         h1.title Gyroball
       ion-content
-        canvas#gameCanvas(width='{{x}}px', height='{{y}}px')
+        canvas#playground(width='{{x}}px', height='{{y}}px')
         .area(style='width: {{x}}px; height: {{y}}px;')
-          .hole(style='left: 200px; height: 50px;')
+          .hole(style='left: 200px; height: 50px;') 
           .ball(style='left: {{ballX}}px; top: {{ballY}}px;')
         pre {{orientation | json}}
         pre {{data | json}}

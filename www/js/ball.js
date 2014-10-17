@@ -1,8 +1,10 @@
 /* jshint boss: true */
 (function(){
   'use strict';
-  var canvas = document.getElementById('canvas'),
-      context = canvas.getContext('2d'),
+  var canvas = document.getElementById('gameCanvas'),
+      ctx = canvas.getContext('2d'),
+      // img = document.getElementById('ball'),
+      // ctx.drawImage(img,10,10),
       ball = {},
       gravity = 0.2,
       bounceFactor = 0.7,
@@ -28,17 +30,17 @@
       // Begin drawing the path, using the arc() function to draw the circle.
       // Arc function accepts 6 parameters: x position, y position, radius,
       // start angle, end angle and a boolean for anti-clockwise direction.
-      context.beginPath();
-      context.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-      context.fillStyle = this.color;
-      context.fill();
-      context.closePath();
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+      ctx.fillStyle = this.color;
+      ctx.fill();
+      ctx.closePath();
     }
   };
   // Repaints canvas each frame- helps in keeping the area clean without
   // any repetition mess.
   function clearCanvas(){
-    context.clearRect(0, 0, W, H);
+    ctx.clearRect(0, 0, W, H);
   }
   // Update the position of the ball
   function update(){
