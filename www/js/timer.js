@@ -17,5 +17,5 @@
       console.log('Timer Stopped - data = ', data);
     });
     // END Timer
-  });
+  }]);
 })();
