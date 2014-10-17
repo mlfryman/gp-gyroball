@@ -1,7 +1,7 @@
 /* jshint boss: true */
 (function(){
   'use strict';
-  var canvas = document.getElementById('gameCanvas'),
+  var canvas = document.getElementById('playground'),
       ctx = canvas.getContext('2d'),
       // img = document.getElementById('ball'),
       // ctx.drawImage(img,10,10),
