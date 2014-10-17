@@ -1,62 +1,102 @@
 /* jshint boss: true */
 (function(){
   'use strict';
-  var canvas = document.getElementById('playground'),
-      ctx = canvas.getContext('2d'),
-      // img = document.getElementById('ball'),
-      // ctx.drawImage(img,10,10),
-      ball = {},
-      gravity = 0.2,
-      bounceFactor = 0.7,
-      W = document.documentElement.clientWidth,
-      H = document.documentElement.clientHeight - 20; //-20 accounts for iphone availHeight
-  // Applying these to the canvas element
-  canvas.height = H;
-  canvas.width = W;
-  // The ball object
-  // It will contain the following details
-  // 1) Its x and y position
-  // 2) Radius and color
-  // 3) Velocity vectors
-  // 4) the method to draw or paint it on the canvas
 
-  ball = {x: Math.floor(Math.random() * canvas.W + 1),
-    y: Math.floor(Math.random() * canvas.H + 1),
-    radius: 15,
-    color: 'red',
-    vx: 0,
-    vy: 1,
-    draw: function(){
-      // Begin drawing the path, using the arc() function to draw the circle.
-      // Arc function accepts 6 parameters: x position, y position, radius,
-      // start angle, end angle and a boolean for anti-clockwise direction.
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
-      ctx.fillStyle = this.color;
-      ctx.fill();
-      ctx.closePath();
+  //  Ball.init({
+  //  size: 20,
+  //  xPos: Game.playground.width - 30,
+  //  yPos: Game.playground.height - 30
+  //  });
+
+  var Ball = {
+
+    init: function(settings) {
+        this.size = settings.size;
+        this.status = 'rolling'; // rolling, crashing, onabrick
+        this.position = {
+            x: settings.xPos,
+            y: settings.yPos
+        };
+
+        // Draw the ball
+        this.draw();
+    },
+
+    // Draw the ball
+    draw: function() {
+        Game.playgroundContext.fillStyle = '#8d2544';
+        Game.playgroundContext.beginPath();
+        Game.playgroundContext.arc(this.position.x, this.position.y, this.size / 2, 0, 2 * Math.PI);
+        Game.playgroundContext.closePath();
+        Game.playgroundContext.fill();
+    },
+
+    // Ball movement
+    roll: function(motionX, motionY) {
+
+        this.position.y += motionY;
+        this.position.x += motionX;
+
+        Game.clearPlayground();
+        Target.draw();
+        this.draw();
+        Boundaries.draw();
+        Obstacles.draw();
+    },
+
+    /*
+     * Make the ball crash against boundaries
+     */
+    crash: function(outofboundaries) {
+        this.status = 'crashing';
+
+        if (outofboundaries === 'left') {
+            this.position.x = Boundaries.left - 0 + (this.originalSize / 2);
+        }
+        else if (outofboundaries === 'top') {
+            this.position.y = Boundaries.top - 0 + (this.originalSize / 2);
+        }
+        else if (outofboundaries === 'right') {
+            this.position.x = Boundaries.top - 0 + Boundaries.width - (this.originalSize / 2);
+        }
+        else if (outofboundaries === 'bottom') {
+            this.position.y = Boundaries.left - 0 + Boundaries.height - (this.originalSize / 2);
+        }
+
+        this.draw();
+    },
+    /*
+     * fall
+     * Make the ball fall into the hole
+     */
+    fall: function(x, y) {
+        /* Update ball status */
+        this.status = 'falling';
+
+        /* Update ball position */
+        this.position.x = x;
+        this.position.y = y;
+
+        /* Decrease ball size */
+        this.size -= 1;
+
+        /* Repaint */
+        Game.clearPlayground();
+        Target.draw();
+//        Boundaries.draw();
+//        Obstacles.draw();
+        this.draw();
+
+        /* Animate until the ball is visible */
+        if (this.size > 0) {
+            var self = this;
+            window.requestAnimationFrame(function() {
+                self.fall(x, y);
+            });
+        }
+        else {
+            this.status = 'rolling';
+        }
     }
-  };
-  // Repaints canvas each frame- helps in keeping the area clean without
-  // any repetition mess.
-  function clearCanvas(){
-    ctx.clearRect(0, 0, W, H);
-  }
-  // Update the position of the ball
-  function update(){
-    clearCanvas();
-    ball.draw();
-    // Adds velocity vectors to its positionball.y += ball.vy;
-    // Adds accelerationball.vy += gravity;
-    // Rebounds
-    if(ball.y + ball.radius > H){
-      // First, reposition the ball on top of the floor and then bounce it!
-      ball.y = H - ball.radius;
-      ball.vy *= -bounceFactor;
-      // The bounceFactor variable that we created decides the elasticity or how
-      // elastic the collision will be. If it's 1, then the collision will be
-      // perfectly elastic. If 0, then it will be inelastic.
-    }
-  }
-  setInterval(update, 1000/60);
+};
 })();
