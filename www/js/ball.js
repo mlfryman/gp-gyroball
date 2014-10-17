@@ -13,7 +13,7 @@
 
     function init(settings){
       this.size = settings.size;
-      this.status = 'rolling'; // rolling, crashing, onabrick
+      this.status = 'rolling'; // rolling, crashing
       this.position = {
         x: settings.xPos,
         y: settings.yPos
@@ -44,9 +44,7 @@
       Boundaries.draw();
     }
 
-    /*
-     * Make the ball crash against boundaries
-     */
+    // Crash against boundaries
     function crash(outofboundaries){
       this.status = 'crashing';
 
@@ -66,38 +64,17 @@
       this.draw();
     }
 
-    /*
-     * fall
-     * Make the ball fall into the hole
-     */
+    // Fall into the hole
     function fall(x, y){
-      /* Update ball status */
       this.status = 'falling';
 
-      /* Update ball position */
       this.position.x = x;
       this.position.y = y;
 
-      /* Decrease ball size */
-      this.size -= 1;
-
-      /* Repaint */
       Game.clearPlayground();
-      Target.draw();
-      //  Boundaries.draw();
-      //  Obstacles.draw();
-      this.draw();
 
-      /* Animate until the ball is visible */
-      if (this.size > 0){
-        var self = this;
-        window.requestAnimationFrame(function(){
-          self.fall(x, y);
-        });
-      }
-      else {
-        this.status = 'rolling';
-      }
+      // Alert user that they have won the game!
+
     }
 
 

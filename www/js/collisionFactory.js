@@ -2,12 +2,6 @@
 (function(){
   'use strict';
 
-  //  Ball.init({
-  //  size: 20,
-  //  xPos: Game.playground.width - 30,
-  //  yPos: Game.playground.height - 30
-  //  });
-
   angular.module('gyroball')
   .factory('Collision', ['Ball', 'Game', 'Boundaries', 'Target', function(Ball, Game, Boundaries, Target){
 
@@ -27,6 +21,7 @@
 
       return false;
     }
+
     /*
      * boundaries
      * Check whether the ball should crash against a boundary
@@ -37,7 +32,6 @@
     function boundaries(x, y){
       var ret = '';
 
-      /* Boundaries */
       if (y <= (Boundaries.top - 0 + (Ball.size / 2))){
         ret += 'top';
       }
