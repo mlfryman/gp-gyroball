@@ -2,12 +2,9 @@
   'use strict';
 
   angular.module('gyroball')
-  .factory('Boundaries', ['Game', function(Game){
+  .factory('Boundaries', ['$scope', 'Game', function($scope, Game){
 
-    /*
-     * init
-     * Initialize the object
-     */
+    // Initialize boundaries
     function init(settings){
         if (settings){
             this.margin = settings.margin;
@@ -20,10 +17,8 @@
 
         this.draw();
     }
-    /*
-     * draw
-     * Draw the boundaries
-     */
+
+    // Draw boundaries
     function draw(){
         Game.playgroundContext.strokeStyle = '#000000';
         Game.playgroundContext.beginPath();
@@ -33,5 +28,7 @@
     }
 
     return {init:init, draw:draw};
+
+  //- Last brackets
   }]);
 })();

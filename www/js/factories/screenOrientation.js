@@ -1,25 +1,17 @@
-/* jshint unused: false */
-
 (function(){
   'use strict';
 
   angular.module('gyroball', ['ionic'])
   .factory('ScreenOrientation', ['$scope', function($scope){
 
-    /*
-     * init
-     * Initialize the object
-     */
-
+    // Initialize screen properties taking into account vendor prefixes
     function init(){
-      /* Initialize screen properties taking into account vendor prefixes */
       screen.orientation = screen.orientation || screen.mozOrientation || screen.msOrientation;
       screen.lockOrientation = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
       screen.unlockOrientation = screen.unlockOrientation || screen.mozUnlockOrientation || screen.msUnlockOrientation;
     }
 
     /*
-     * isScreenOrientationSupported
      * Check if window.orientation property is supported
      * @returns {Boolean}
      */
@@ -31,7 +23,6 @@
     }
 
     /*
-     * getOrientation
      * get device orientation
      * @returns {String} orientation
      */
@@ -40,8 +31,7 @@
     }
 
     /*
-     * lockOrientation
-     * lock the orientation to the value specified as parameter
+     * Lock the screen orientation to the value specified as parameter
      * @param {String} orientation
      */
     function lockOrientation(orientation){
@@ -50,10 +40,7 @@
       }
     }
 
-    /*
-     * unlockOrientation
-     * unlock the orientation
-     */
+    // Unlock the orientation
     function unlockOrientation(){
       if(screen.unlockOrientationFunction){
         screen.unlockOrientationFunction();
@@ -61,7 +48,6 @@
     }
 
     /*
-     * handleOrientation
      * handle screen orientation
      * @param {Object} callbacks
      */
@@ -100,7 +86,6 @@
     }
 
     /*
-     * handleOrientationChange
      * handle orientation change
      * @param {Object} callbacks
      */
@@ -137,5 +122,9 @@
          };
        }
       }
+
+    return {init:init, isScreenOrientationSupported:isScreenOrientationSupported, getOrientation:getOrientation, lockOrientation:lockOrientation, unlockOrientation:unlockOrientation, handleOrientation:handleOrientation, handleOrientationChange:handleOrientationChange};
+
+  //- Last brackets
   }]);
 })();

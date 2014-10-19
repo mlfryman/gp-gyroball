@@ -41,5 +41,7 @@
         /* Start the Game */
         Game.start();
     }
+    
+  //- Last brackets
   }]);
 })();

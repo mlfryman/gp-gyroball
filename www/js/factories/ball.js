@@ -1,4 +1,3 @@
-/* jshint boss: true */
 (function(){
   'use strict';
 
@@ -9,8 +8,9 @@
   //  });
 
   angular.module('gyroball')
-  .factory('Ball', ['Game', 'Boundaries', 'Target', function(Game, Boundaries, Target){
+  .factory('Ball', ['$scope', 'Game', 'Boundaries', 'Target', function($scope, Game, Boundaries, Target){
 
+    // Initialize the ball
     function init(settings){
       this.size = settings.size;
       this.status = 'rolling'; // rolling, crashing
@@ -18,8 +18,6 @@
         x: settings.xPos,
         y: settings.yPos
       };
-
-      // Draw the ball
       this.draw();
     }
 
@@ -44,7 +42,7 @@
       Boundaries.draw();
     }
 
-    // Crash against boundaries
+    // Crash ball against boundaries
     function crash(outofboundaries){
       this.status = 'crashing';
 
@@ -64,7 +62,7 @@
       this.draw();
     }
 
-    // Fall into the hole
+    // Ball falls into the target/hole
     function fall(x, y){
       this.status = 'falling';
 
@@ -79,5 +77,6 @@
 
     return {init:init, draw:draw, roll:roll, crash:crash, fall:fall};
 
+  //- Last brackets
   }]);
 })();

@@ -2,11 +2,9 @@
   'use strict';
 
   angular.module('gyroball')
-  .factory('Target',['Game', function(Game){
-    /*
-     * init
-     * Initialize the object
-     */
+  .factory('Target',['$scope', 'Game', function($scope, Game){
+
+    // Initialize the target/hole
     function init(settings){
         this.size = settings.size;
 
@@ -15,13 +13,10 @@
             y: settings.yPos
         };
 
-        /* Draw the hole */
         this.draw();
     }
-    /*
-     * draw
-     * Draw the hole
-     */
+
+    // Draw target/hole
     function draw(){
         Game.playgroundContext.fillStyle = '#000000';
         Game.playgroundContext.beginPath();
@@ -31,5 +26,7 @@
     }
 
     return {init:init, draw:draw};
+
+  //- Last brackets
   }]);
 })();

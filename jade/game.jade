@@ -1,0 +1,10 @@
+canvas#playground(width='2000', height='2000')
+//- canvas#playground(width='{{x}}px', height='{{y}}px')
+
+pre {{orientation | json}}
+pre {{data | json}}
+.bar.bar-footer.bar-stable
+  button(ng-click='startTimer()') Start
+  button(ng-click='stopTimer()') Stop
+  .timer
+    timer(autostart='false', interval='1000') {{minutes}} min, {{seconds}} sec

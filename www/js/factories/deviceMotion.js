@@ -5,15 +5,13 @@
 
   angular.module('gyroball', ['ionic'])
   .factory('DeviceMotionControl', ['$scope', 'ScreenOrientation', function($scope, ScreenOrientation){
-    /*
-     * Initialize the object
-     */
+
+    // Initialize device motion control
     function init(){
     }
 
     /*
-     * isDeviceMotionEventSupported
-     * Check if the devicemotion event is supported
+     * Check if the device orientation event is supported
      * @returns {Boolean}
      */
     function isDeviceOrientationEventSupported(){
@@ -24,8 +22,7 @@
      }
 
      /*
-      * isDeviceMotionEventSupported
-      * Check if the devicemotion event is supported
+      * Check if the device motion event is supported
       * @returns {Boolean}
       */
      function isDeviceMotionEventSupported(){
@@ -36,7 +33,6 @@
      }
 
      /*
-      * handleMotionEvent
       * Listen to the devicemotion event and invoke the callback function every time the event is fired
       * @param {Function} callback
       */
@@ -77,7 +73,10 @@
             });
           };
         }
-  // last brackets
       }
+
+      return {init:init, isDeviceOrientationEventSupported:isDeviceOrientationEventSupported, isDeviceMotionEventSupported:isDeviceMotionEventSupported, handleMotionEvent:handleMotionEvent};
+
+   //- Last brackets
    }]);
 })();

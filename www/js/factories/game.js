@@ -1,15 +1,12 @@
-/*jshint unused:false, undef:false */
 (function(){
   'use strict';
 
   angular.module('gyroball')
-  .factory('Game',['ScreenOrientation','Ball', 'CollisionFactory', 'Target', 'Boundaries', 'DeviceMotionControl', function(ScreenOrientation, Ball, CollisionFactory, Target, Boundaries, DeviceMotionControl){
+  .factory('Game',['$scope', 'Ball', 'Boundaries', 'Collision', 'DeviceMotionControl', 'ScreenOrientation', 'Target', function($scope, Ball, Boundaries, Collision, DeviceMotionControl, ScreenOrientation, Target){
 
     var Game = {};
-    /*
-     * init
-     * Initialize the object
-     */
+
+    // Initialize the game
     function init(){
         this.status = 'stopped';
         this.level = 1;
@@ -29,10 +26,8 @@
                 window.webkitRequestAnimationFrame || sRequestAnimationFrame;
 
     }
-    /*
-     * start
-     * Starts the level
-     */
+
+    // Start the level
     function start(){
         /* Clear the playground */
         this.clearPlayground();
@@ -40,13 +35,11 @@
         this.playground.setAttribute('width', window.innerWidth - 5);
         this.playground.setAttribute('height', window.innerHeight - 5);
 
-        /* Draw toy pieces */
+        /* Draw game pieces */
         Boundaries.init();
         this.generateTarget();
-        this.generateObstacles();
+        //this.generateObstacles();
         this.generateBall();
-
-
 
         /* Handle the screen orientation change */
         ScreenOrientation.handleOrientationChange({
@@ -62,13 +55,10 @@
         /* The game is running now */
         this.status = 'running';
     }
+
     /*
-     * step
      * Push the game a step forward, called every time the ball moves
-     * @param {Double} motionX
-     * @param {Double} motionY
-     * @param {Double} motionZ
-     * @param {Integer} interval
+     * @param {Double} motionX; @param {Double} motionY; @param {Double} motionZ; @param {Integer} interval
      */
     function step(motionX, motionY, motionZ, interval){
 
@@ -107,15 +97,15 @@
             nextPositionY = Ball.position.y - 0 + motionY;
 
         /* Check if the ball reached the target */
-        if (CollisionFactory.target(nextPositionX, nextPositionY)){
+        if (Collision.target(nextPositionX, nextPositionY)){
             self.stop();
             self.nextLevel();
 
             return;
         }
 
-        /* Check if the ball collides with a brick or boundaries  */
-        var collision = CollisionFactory.obstacles(nextPositionX, nextPositionY) || CollisionFactory.boundaries(nextPositionX, nextPositionY);
+        /* Check if the ball collides with boundaries  */
+        var collision = Collision.boundaries(nextPositionX, nextPositionY);
         if (collision) {
 
             if (collision === 'left' || collision === 'right') {
@@ -155,34 +145,29 @@
         }
 
     }
-    /*
-     * pause
-     * Pause the game
-     */
+
+    // Pause the game
+    // MLF NOTE: this feature will be included in the next version
     function pause(){
         this.status = 'paused';
     }
-    /*
-     * resume
-     * Resume the game
-     */
+
+    // Resume the game
+    // MLF NOTE: this feature will be included in the next version
     function resume(){
         var self = this;
         setTimeout(function(){
             self.status = 'running';
         }, 1000);
     }
-    /*
-     * stop
-     * Stop the game
-     */
+
+    // Stop the game
     function stop(){
         this.status = 'stopped';
     }
-    /*
-     * nextLevel
-     * Go to the next level
-     */
+
+    // Go to next level
+    // MLF NOTE: this feature will be included in the next version
     function nextLevel(){
         Ball.fall(Target.position.x, Target.position.y);
 
@@ -193,51 +178,40 @@
             window.location = '';
         }, 3000);
     }
-    /*
-     * clearPlayground
-     * Remove toy pieces from the playground
-     */
+
+    // Remove game pieces from playground
     function clearPlayground(){
         this.playgroundContext.clearRect(0, 0, this.playground.width, this.playground.height);
     }
 
-    /*
-     * generateTarget
-     * Draw the hole in a random position
-     */
+    // Draw the target/hole in a random position
     function generateTarget(){
         var xPos,
             yPos,
-
-         leftMax = Boundaries.left - 0 + (Boundaries.width / 2) - Target.size,
-         leftMin = Boundaries.left - 0 + Target.size,
-
-         topMax = Boundaries.top - 0 + (Boundaries.height / 2) - Target.size,
-         topMin = Boundaries.top - 0 + Target.size;
+            leftMax = Boundaries.left - 0 + (Boundaries.width / 2) - Target.size,
+            leftMin = Boundaries.left - 0 + Target.size,
+            topMax = Boundaries.top - 0 + (Boundaries.height / 2) - Target.size,
+            topMin = Boundaries.top - 0 + Target.size;
 
         do {
             xPos = (Math.random() * (leftMax - leftMin)) - 0 + leftMin;
             yPos = (Math.random() * (topMax - topMin)) - 0 + topMin;
         }
-        while (CollisionFactory.obstacles(xPos, yPos) || CollisionFactory.boundaries(xPos, yPos));
+        while(Collision.obstacles(xPos, yPos) || Collision.boundaries(xPos, yPos));
 
         Target.position.x = xPos;
         Target.position.y = yPos;
         Target.draw();
     }
-    /*
-     * generateBall
-     * Draw the ball in a random position
-     */
+
+    // Draw the ball in a random position
     function generateBall(){
         Ball.size = Ball.originalSize;
 
         var xPos,
             yPos,
-
             leftMax = Boundaries.left - 0 + Boundaries.width - Ball.size,
             leftMin = Boundaries.left - 0 + (Boundaries.width / 2),
-
             topMax = Boundaries.top - 0 + Boundaries.height - Ball.size,
             topMin = Boundaries.top - 0 + (Boundaries.height / 2);
 
@@ -245,7 +219,7 @@
             xPos = (Math.random() * (leftMax - leftMin)) - 0 + leftMin;
             yPos = (Math.random() * (topMax - topMin)) - 0 + topMin;
         }
-        while (CollisionFactory.obstacles(xPos, yPos) || CollisionFactory.boundaries(xPos, yPos) || CollisionFactory.target(xPos, yPos));
+        while(Collision.boundaries(xPos, yPos) || Collision.target(xPos, yPos));
 
         Ball.position.x = xPos;
         Ball.position.y = yPos;
@@ -253,5 +227,7 @@
     }
 
     return {init:init, start:start, step:step, pause:pause, resume:resume, stop:stop, nextLevel:nextLevel, clearPlayground:clearPlayground, generateTarget:generateTarget, generateBall:generateBall};
+
+  //- Last brackets
   }]);
 })();
