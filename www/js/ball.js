@@ -77,7 +77,6 @@
 
     }
 
-
     return {init:init, draw:draw, roll:roll, crash:crash, fall:fall};
 
   }]);
