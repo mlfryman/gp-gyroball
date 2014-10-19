@@ -4,18 +4,33 @@ html
     meta(charset='utf-8')
     meta(name='viewport', content='initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width')
     title
-    // compiled css output
     link(href='css/ionic.app.css', rel='stylesheet')
     link(href='css/style.css', rel='stylesheet')
-    // ionic/angularjs js
     script(src='lib/ionic/js/ionic.bundle.js')
-    // cordova script (this will be a 404 during development)
     script(src='cordova.js')
-    // your app's js
+    script(src='lib/angular-timer/dist/angular-timer.min.js')
     script(src='js/app.js')
     script(src='js/MainCtrl.js')
+    script(src='js/ball.js')
+    script(src='js/boundaries.js')
+    script(src='js/game.js')
+    script(src='js/start.js')
+    script(src='js/target.js')
+    script(src='js/ScreenOrientation.js')
+    script(src='js/DeviceMotionControl.js')
   body(data-ng-app='gyroball')
-    ion-pane
+    ion-pane(data-ng-controller='MainCtrl')
       ion-header-bar.bar-stable
         h1.title Gyroball
-      ion-content(data-ng-controller='MainCtrl')
+      ion-content
+        canvas#playground(width='{{x}}px', height='{{y}}px')
+        .area(style='width: {{x}}px; height: {{y}}px;')
+          .hole(style='left: 200px; height: 50px;')
+          .ball(style='left: {{ballX}}px; top: {{ballY}}px;')
+        pre {{orientation | json}}
+        pre {{data | json}}
+        .bar.bar-footer.bar-stable
+          button(ng-click='startTimer()') Start
+          button(ng-click='stopTimer()') Stop
+          .timer
+            timer(autostart='false', interval='1000') {{minutes}} min, {{seconds}} sec
