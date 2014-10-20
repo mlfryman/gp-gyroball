@@ -4,7 +4,7 @@
   'use strict';
 
   angular.module('gyroball', ['ionic'])
-  .factory('DeviceMotionControl', ['$scope', 'ScreenOrientation', function($scope, ScreenOrientation){
+  .factory('DeviceMotion', ['$scope', 'ScreenOrientation', function($scope, ScreenOrientation){
 
     // Initialize device motion control
     function init(){
