@@ -1,0 +1,11 @@
+
+<canvas id="playground" width="2000" height="2000"></canvas>
+<pre>{{orientation | json}}</pre>
+<pre>{{data | json}}</pre>
+<div class="bar bar-footer bar-stable">
+  <button ng-click="startTimer()">Start</button>
+  <button ng-click="stopTimer()">Stop</button>
+  <div class="timer">
+    <timer autostart="false" interval="1000">{{minutes}} min, {{seconds}} sec</timer>
+  </div>
+</div>

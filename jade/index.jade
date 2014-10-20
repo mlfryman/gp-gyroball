@@ -6,15 +6,6 @@ html
     title
     link(href='css/ionic.app.css', rel='stylesheet')
     link(href='css/style.css', rel='stylesheet')
-    //- scripts were located here
-
-  body(data-ng-app='gyroball')
-    ion-pane(data-ng-controller='AppCtrl')
-      ion-header-bar.bar-stable
-        h1.title Gyroball
-      ion-content(data-ng-view='')
-    //- moved scripts from above to test if order matters in mobile
-
     script(src='cordova.js')
     script(src='lib/ionic/js/ionic.bundle.js')
     script(src='lib/angular-timer/dist/angular-timer.min.js')
@@ -29,3 +20,19 @@ html
     script(src='js/factories/target.js')
     script(src='js/factories/screenOrientation.js')
     script(src='js/factories/deviceMotion.js')
+
+  body(data-ng-app='gyroball')
+    ion-pane(data-ng-controller='AppCtrl')
+      ion-header-bar.bar-stable
+        h1.title Gyroball
+      ion-content
+        canvas#playground(width='2000', height='2000')
+        //- canvas#playground(width='{{x}}px', height='{{y}}px')
+
+        pre {{orientation | json}}
+        pre {{data | json}}
+      .bar.bar-footer.bar-stable
+        button(ng-click='startTimer()') Start
+        button(ng-click='stopTimer()') Stop
+        .timer
+          timer(autostart='false', interval='1000') {{minutes}} min, {{seconds}} sec

@@ -1,8 +1,10 @@
+/* jshint undef: false */
+
 (function(){
   'use strict';
 
   angular.module('gyroball')
-  .factory('Game',['$scope', 'Ball', 'Boundaries', 'Collision', 'DeviceMotionControl', 'ScreenOrientation', 'Target', function($scope, Ball, Boundaries, Collision, DeviceMotionControl, ScreenOrientation, Target){
+  .factory('Game', ['$scope', 'Ball', 'Boundaries', 'Collision', 'DeviceMotionControl', 'ScreenOrientation', 'Target', function($scope, Ball, Boundaries, Collision, DeviceMotionControl, ScreenOrientation, Target){
 
     var Game = {};
 
