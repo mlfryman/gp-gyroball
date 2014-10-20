@@ -1,7 +1,7 @@
 {
   "name": "gyroball",
   "version": "1.0.0",
-  "description": "gyroball: An Ionic project",
+  "description": "Gyroball: Use your phone\'s motion to guide the rolling ball into the target!",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-concat": "^2.2.0",
