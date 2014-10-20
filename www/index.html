@@ -16,20 +16,17 @@
     <script src="js/factories/boundaries.js"></script>
     <script src="js/factories/collision.js"></script>
     <script src="js/factories/game.js"></script>
-    <script src="js/factories/start.js"></script>
     <script src="js/factories/target.js"></script>
     <script src="js/factories/screenOrientation.js"></script>
     <script src="js/factories/deviceMotion.js"></script>
   </head>
-  <body data-ng-app="gyroball">
-    <ion-pane data-ng-controller="AppCtrl">
+  <body ng-app="gyroball">
+    <ion-pane ng-controller="AppCtrl">
       <ion-header-bar class="bar-stable">
         <h1 class="title">Gyroball</h1>
       </ion-header-bar>
       <ion-content>
         <canvas id="playground" width="2000" height="2000"></canvas>
-        <pre>{{orientation | json}}</pre>
-        <pre>{{data | json}}</pre>
       </ion-content>
       <div class="bar bar-footer bar-stable">
         <button ng-click="startTimer()">Start</button>

@@ -16,21 +16,19 @@ html
     script(src='js/factories/boundaries.js')
     script(src='js/factories/collision.js')
     script(src='js/factories/game.js')
-    script(src='js/factories/start.js')
+    //- script(src='js/factories/start.js')
     script(src='js/factories/target.js')
     script(src='js/factories/screenOrientation.js')
     script(src='js/factories/deviceMotion.js')
 
-  body(data-ng-app='gyroball')
-    ion-pane(data-ng-controller='AppCtrl')
+  body(ng-app='gyroball')
+    ion-pane(ng-controller='AppCtrl')
       ion-header-bar.bar-stable
         h1.title Gyroball
       ion-content
         canvas#playground(width='2000', height='2000')
         //- canvas#playground(width='{{x}}px', height='{{y}}px')
 
-        pre {{orientation | json}}
-        pre {{data | json}}
       .bar.bar-footer.bar-stable
         button(ng-click='startTimer()') Start
         button(ng-click='stopTimer()') Stop

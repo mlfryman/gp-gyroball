@@ -2,13 +2,12 @@
   'use strict';
 
   angular.module('gyroball', ['ionic', 'timer'])
-  .controller('AppCtrl', ['$scope', '$interval', 'Ball', 'Boundaries', 'Collision', 'DeviceMotion', 'Game', 'ScreenOrientation', 'Target', function($scope, $interval, Ball, Boundaries, Collision, DeviceMotion, Game, ScreenOrientation, Target){
+  .controller('AppCtrl', ['$scope', '$interval', '$window', 'Ball', 'Boundaries', 'Collision', 'DeviceMotion', 'Game', 'ScreenOrientation', 'Target', function($scope, $interval, $window, Ball, Boundaries, Collision, DeviceMotion, Game, ScreenOrientation, Target){
      // Timer
      $scope.startTimer = function(){
        $scope.$broadcast('timer-start');
        $scope.timerRunning = true;
      };
-
 
      $scope.stopTimer = function(){
        $scope.$broadcast('timer-stop');
@@ -21,8 +20,7 @@
      //END Timer
 
      // Initialize the app by calling all init functions
-     var App = {
-       init: function(){
+     $scope.appInit = function(){
           // Initialize game
           Game.init();
 
@@ -54,11 +52,10 @@
 
           // Start the actual game
           Game.start();
-        }
-      };
+        };
 
       /* Initialize app when the window is loaded */
-      window.onload = App.init();
+      // window.onload = initApp();
   //- Last brackets
   }]);
 })();
